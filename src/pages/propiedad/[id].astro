@@ -1,0 +1,120 @@
+---
+import "../../styles/global.css";
+import { supabase } from "../../lib/supabase";
+import { marked } from "marked";
+
+// 1. Obtener el ID de la URL (ej: propiedad/15)
+const { id } = Astro.params;
+
+// 2. Redirigir si no hay ID
+if (!id) return Astro.redirect("/");
+
+// 3. Buscar esa casa específica en Supabase
+const { data: casa, error } = await supabase
+  .from("propiedades")
+  .select("*")
+  .eq("id", id)
+  .single(); // .single() es vital, nos devuelve un objeto, no un array
+
+// 4. Si no existe, error 404 (o redirigir)
+if (error || !casa) return Astro.redirect("/404");
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>{casa.titulo} | Inmobiliaria Crece</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body class="bg-slate-50 text-slate-900 font-sans pb-20">
+    <nav class="bg-white p-4 shadow-sm mb-6">
+      <div class="max-w-4xl mx-auto">
+        <a
+          href="/"
+          class="text-blue-600 font-bold flex items-center gap-2 hover:underline"
+        >
+          ← Volver al inicio
+        </a>
+      </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4">
+      <div class="mb-6">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
+          {casa.titulo}
+        </h1>
+        <p class="text-3xl font-bold text-blue-600">
+          ${new Intl.NumberFormat("es-MX").format(casa.precio)}
+        </p>
+        <p class="text-slate-500 mt-1 flex items-center gap-1">
+          📍 {casa.ubicacion}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {
+          casa.imagenes_url?.map((img, index) => (
+            <img
+              src={img}
+              class={`w-full h-64 object-cover rounded-xl shadow-sm ${index === 0 ? "md:col-span-2 md:h-96" : ""}`}
+              alt={`Foto ${index + 1}`}
+            />
+          ))
+        }
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="md:col-span-2">
+          <h2 class="text-xl font-bold mb-4 border-b pb-2">Descripción</h2>
+          <div
+            class="prose prose-slate max-w-none bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+          >
+            <div set:html={marked.parse(casa.descripcion)} />
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div
+            class="bg-white p-6 rounded-xl shadow-lg border border-slate-100"
+          >
+            <div class="grid grid-cols-2 gap-4 mb-6 text-center">
+              <div class="bg-slate-50 p-3 rounded-lg">
+                <span class="block text-2xl">🛏️</span>
+                <span class="font-bold">{casa.habitaciones}</span> Habs
+              </div>
+              <div class="bg-slate-50 p-3 rounded-lg">
+                <span class="block text-2xl">🚿</span>
+                <span class="font-bold">{casa.banos}</span> Baños
+              </div>
+            </div>
+
+            <a
+              href={`https://wa.me/5214493096189?text=Hola, me interesa la propiedad: ${casa.titulo} que vi en su web.`}
+              target="_blank"
+              class="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold py-3 rounded-lg transition shadow-md hover:shadow-lg transform hover:-translate-y-1"
+            >
+              📲 Me interesa por WhatsApp
+            </a>
+          </div>
+
+          <div
+            class="bg-slate-200 h-64 rounded-xl overflow-hidden shadow-inner relative group"
+          >
+            <iframe
+              width="100%"
+              height="100%"
+              frameborder="0"
+              style="border:0"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(casa.ubicacion + ", Aguascalientes")}&output=embed`}
+              allowfullscreen></iframe>
+            <div
+              class="absolute bottom-0 w-full bg-white/80 p-2 text-xs text-center text-slate-500"
+            >
+              Ubicación aproximada: {casa.ubicacion}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
