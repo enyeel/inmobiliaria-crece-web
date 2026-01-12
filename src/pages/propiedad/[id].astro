@@ -67,7 +67,9 @@ if (error || !casa) return Astro.redirect("/404");
         <div class="md:col-span-2">
           <h2 class="text-xl font-bold mb-4 border-b pb-2">Descripción</h2>
           <div
-            class="prose prose-slate max-w-none bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+            class="prose prose-slate max-w-none bg-white p-6 rounded-xl shadow-sm border border-slate-100
+            prose-strong:text-blue-900 prose-strong:font-extrabold
+            prose-li:marker:text-blue-500"
           >
             <div set:html={marked.parse(casa.descripcion)} />
           </div>

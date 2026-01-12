@@ -107,7 +107,9 @@ if (error) console.error("Error trayendo casas:", error);
                     </div>
                   </div>
 
-                  <div class="prose prose-sm prose-slate mb-6 text-slate-500 line-clamp-4">
+                  <div class="prose prose-sm prose-slate mb-6 text-slate-500 line-clamp-4
+                    prose-strong:text-blue-900 prose-strong:font-extrabold
+                    prose-li:marker:text-blue-500 prose-ul:my-2 prose-p:my-2">
                     <div set:html={marked.parse(casa.descripcion)} />
                   </div>
 
