@@ -1,6 +1,6 @@
 # 🏡 n8n AI Listings Ingestion (SaaS Prototype)
 
-![Status](https://img.shields.io/badge/Status-Prototype-blue) ![Stack](https://img.shields.io/badge/Stack-Astro_Supabase_n8n_Gemini-orange)
+![Status](https://img.shields.io/badge/Status-Prototype-blue) ![Stack](https://img.shields.io/badge/Stack-Astro_Supabase_n8n_Gemini-orange) ![License](https://img.shields.io/badge/License-MIT-green)
 
 > **A Full-Stack Real Estate ETL Pipeline.**
 > Automates property listing creation from unstructured chat messages using AI agents and serverless architecture.
