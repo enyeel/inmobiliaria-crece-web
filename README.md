@@ -66,16 +66,6 @@ Desarrollé un **Pipeline de Ingesta Automatizada (ETL)**. El agente solo reenv�
 
 ---
 
-## 📸 Screenshots / Demo
-
-*(Place your GIF or Screenshots here showing the Chat-to-Web flow)*
-
-| Chat Input (WhatsApp) | AI Processing (n8n) | Final Web Result |
-| :---: | :---: | :---: |
-| ![Chat](path/to/chat-screenshot.png) | ![n8n](path/to/n8n-screenshot.png) | ![Web](path/to/web-screenshot.png) |
-
----
-
 ## 💻 Local Setup
 
 1.  **Clone the repo**
