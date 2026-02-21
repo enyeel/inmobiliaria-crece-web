@@ -7,7 +7,8 @@
 
 ---
 
-### 🌐 [Live Demo (Vercel)](https://n8n-ai-listings-demo.vercel.app/) | 📺 [Watch the Video Demo](#)
+### 🌐 [Live Demo (Vercel)](https://n8n-ai-listings-demo.vercel.app/) 
+![n8n-ai-listings-ingestion](https://github.com/user-attachments/assets/88351b0f-3a33-4fea-8e4c-b12314a31812)
 
 ---
 
